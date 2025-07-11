@@ -1,0 +1,522 @@
+﻿@model List<WebAPI.Models.Cliente>
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" />
+
+<div class="content-body">
+
+    <div class="container-fluid">
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <div class="ms-2">
+                            <h4 class="card-title">Cadastro de Cliente</h4>
+                            <p class="small-text">Dados para realizar o cadastro.</p>
+                        </div>
+                        <div class="ms-2">
+                            <div class="col-sm text-end">
+                                <button type="button" id="btnSalvar" return false" class="btn btn-success btn-xs text-white">Salvar Cliente</button>
+                                <button type="button" id="btnEditar" return false" class="btn btn-warning btn-xs text-white">Atualizar Cliente</button>
+                                <button type="button" style="display:none" id="btnCancelar" onclick="Cancelar(); return false" class="btn btn-danger btn-xs text-white">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form id="FMCadBanco">
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label for="CPF" class="form-label">CPF</label>
+                                            <input type="text" ID="CPF" name="CPF" class="form-control" style="border-color: Red;">
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="Nome" class="form-label">Nome</label>
+                                            <input type="text" ID="Nome" name="Nome" class="form-control" MaxLength="100" style="border-color: Red;" />
+
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label for="DataNascimento" class="form-label">Data de Nascimento</label>
+                                            <input type="text" ID="DataNascimento" name="DataNascimento" class="form-control" style="border-color: Red;" />
+
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label for="RG" class="form-label">RG</label>
+                                            <input type="text" ID="RG" name="RG" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label for="Sexo" class="form-label">Sexo</label>
+                                            <select id="Sexo" name="Sexo" class="form-control" style="border-color: Red;">
+                                                <option value="M">Masculino</option>
+                                                <option value="F">Feminino</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+
+                                        <div class="col-md-2">
+                                            <label for="DataExpedicao" class="form-label">Data Expedidor</label>
+                                            <input type="text" name="DataExpedicao" ID="DataExpedicao" class="form-control" style="border-color: Red;" TextMode="Date"  />
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label for="OrgaoExpedicao" class="form-label">Órgão Expedidor</label>
+                                            <input type="text" ID="OrgaoExpedicao" name="OrgaoExpedicao" class="form-control"  />
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label for="UF_Expedicao" class="form-label">UF Expedição</label>
+                                            <input type="text" ID="UF_Expedicao" name="UF_Expedicao" class="form-control"  />
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label for="CBOEstadoCivil" class="form-label">Estado Civil</label>
+                                            <select id="EstadoCivil" name="EstadoCivil" class="form-control" style="border-color: Red;">
+                                                <option value="C">Casado</option>
+                                                <option value="S">Solteiro</option>
+                                                <option value="V">Viuvo</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br />
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-sm-2">
+                                            <label for="CEP" class="form-label">CEP</label>
+                                            <input type="text" ID="CEP" name="CEP" class="form-control" MaxLength="9" Placeholder="CEP" style="border-color: Red;" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="Logradouro" class="form-label">Logradouro</label>
+                                            <input type="text" ID="Logradouro" name="Logradouro" class="form-control"  MaxLength="100" style="border-color: Red;" />
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label for="Numero" class="form-label">Número</label>
+                                            <input type="text" ID="Numero" name="=Numero" class="form-control"  MaxLength="5" style="border-color: Red;" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="Complemento" class="form-label">Complemento</label>
+                                            <input type="text" ID="Complemento" name="Complemento" class="form-control"  MaxLength="100" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="Bairro" class="form-label">Bairro</label>
+                                            <input type="text" ID="Bairro" name="Bairro" class="form-control"  MaxLength="30" style="border-color: Red;" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="Cidade" class="form-label">Cidade</label>
+                                            <input type="text" ID="Cidade" name="Cidade" class="form-control"  MaxLength="30" style="border-color: Red;" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label for="CBOUF" class="form-label">UF</label>
+                                            <select id="UF" name="UF" class="form-control" style="border-color: Red;">
+                                                <option value="">Selecione...</option>
+                                                <option value="AC">AC - Acre</option>
+                                                <option value="AL">AL - Alagoas</option>
+                                                <option value="AP">AP - Amapá</option>
+                                                <option value="AM">AM - Amazonas</option>
+                                                <option value="BA">BA - Bahia</option>
+                                                <option value="CE">CE - Ceará</option>
+                                                <option value="DF">DF - Distrito Federal</option>
+                                                <option value="ES">ES - Espírito Santo</option>
+                                                <option value="GO">GO - Goiás</option>
+                                                <option value="MA">MA - Maranhão</option>
+                                                <option value="MT">MT - Mato Grosso</option>
+                                                <option value="MS">MS - Mato Grosso do Sul</option>
+                                                <option value="MG">MG - Minas Gerais</option>
+                                                <option value="PA">PA - Pará</option>
+                                                <option value="PB">PB - Paraíba</option>
+                                                <option value="PR">PR - Paraná</option>
+                                                <option value="PE">PE - Pernambuco</option>
+                                                <option value="PI">PI - Piauí</option>
+                                                <option value="RJ">RJ - Rio de Janeiro</option>
+                                                <option value="RN">RN - Rio Grande do Norte</option>
+                                                <option value="RS">RS - Rio Grande do Sul</option>
+                                                <option value="RO">RO - Rondônia</option>
+                                                <option value="RR">RR - Roraima</option>
+                                                <option value="SC">SC - Santa Catarina</option>
+                                                <option value="SP">SP - São Paulo</option>
+                                                <option value="SE">SE - Sergipe</option>
+                                                <option value="TO">TO - Tocantins</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="card dz-card" id="accordion-five">
+                <div class="card-header flex-wrap d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">Consulta de Cliente(s)</h4>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="myTabContent-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="TbCliente" class="table" style="min-width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Ações</th>
+                                        <th>Nome</th>
+                                        <th>Cidade</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+    window.onload = function () {
+
+        LoadGridCliente();
+    };
+    $('#btnEditar').prop('disabled', true);
+    $(document).ready(function () {
+        $('#DataNascimento').mask('00/00/0000');
+    });
+    $(document).ready(function () {
+        $('#DataExpedicao').mask('00/00/0000');
+    });
+    $('#DataNascimento').on('blur', function () {
+        var valor = $(this).val();
+        var partes = valor.split('/');
+        if (partes.length === 3) {
+            var data = new Date(partes[2], partes[1] - 1, partes[0]);
+            var hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
+            data.setHours(0, 0, 0, 0);
+
+            if (data >= hoje) {
+                alert("A data de nascimento deve ser anterior à data atual.");
+                $(this).val('');
+            }
+        }
+    });
+
+    function ValidarSalvar() {
+        var dataNasc = $('#DataNascimento').val();
+        var dataExpedicao = $('#DataExpedicao').val();
+        var nome = $('#Nome').val();
+        var cpf = $('#CPF').val();
+        var sexo = $('#Sexo').val();
+        var EstadoCivil = $('#EstadoCivil').val();
+        var cep = $('#CEP').val();
+        var log = $('#Logradouro').val();
+        var nume = $('#Numero').val();
+        var Bairro = $('#Bairro').val();
+        var cidade = $('#Cidade').val();
+        var UF = $('#UF').val();
+
+        // Verifica se está preenchido
+        if (!cpf) {
+            alert("Preencha o CPF.");
+
+            return false;
+        }
+        if (!nome) {
+            alert("Informe o nome.");
+
+            return false;
+        }
+        if (!dataNasc) {
+            alert("Preencha a data de nascimento.");
+
+            return false;
+        }
+        if (!dataExpedicao) {
+            alert("Preencha a data Expedidor.");
+
+            return false;
+        }
+
+        if (!sexo) {
+            alert("Preencha a data Expedidor.");
+
+            return false;
+        }
+        if (!EstadoCivil) {
+            alert("Preencha a data Expedidor.");
+
+            return false;
+        }
+
+        //endereço
+        if (!cep) {
+            alert("Preencha o CEP.");
+
+            return false;
+        }
+        if (!log) {
+            alert("Preencha o logradouro.");
+
+            return false;
+        }
+        if (!nume) {
+            alert("Preencha o número.");
+
+            return false;
+        }
+        if (!Bairro) {
+            alert("Preencha o bairro.");
+
+            return false;
+        }
+        if (!cidade) {
+
+            return false;
+        }
+        if (!UF) {
+            alert("Preencha a UF.");
+
+            return false;
+        }       
+        // Se passou na validação
+        return true;
+    }
+
+    function LoadGridCliente() {
+        $.fn.dataTable.ext.errMode = 'none';
+        $('#TbCliente').DataTable({
+            processing: true,
+            serverSide: false,       // deixe false se não for paginar no servidor
+            ajax: {
+                url: '/CCliente/RetornarClientes',  // ajuste a rota conforme seu Controller
+                type: 'GET',
+                dataSrc: function (json) {
+                    // Verifica se o retorno é uma lista e tem itens
+                    if (!json || json.length === 0) {
+                        alert("Nenhum cliente encontrado. O grid não será carregado.");
+                        return []; // impede o carregamento da tabela
+                    }
+                    return json;
+                }
+
+            },
+            columns: [
+                {
+                    data: "CPF",
+                    render: function (data, type, row) {
+                        return `
+                <button class="btn btn-sm btn-primary" onclick="EditarRegGrid('${encodeURIComponent(data)}')">Editar</button>
+                <button class="btn btn-sm btn-danger" onclick="ExcluirRegGrid('${encodeURIComponent(data)}')">Excluir</button>
+            `;
+                    }
+                },
+                { data: 'Nome' },
+                { data: 'Cidade' }
+            ],
+            language: {
+                emptyTable: 'Nenhum cliente encontrado',
+                loadingRecords: 'Carregando...',
+                lengthMenu: 'Mostrar _MENU_ registros'
+            }
+        });
+    }
+    function EditarRegGrid(m) {
+        Editar(m);
+    }
+    function ExcluirRegGrid(m) {
+        Excluir(m);
+    }
+    function VisualizarRegGrid(m) {
+        alert(m);
+    }
+    function Pesquisar() {
+        LoadGridCliente();
+    }
+    function ValidarCamposObrigatorios() {
+        if ($('#codigo').val() == "") {
+            sweetAlert("Oops...", "Informe o código do banco !!", "error")
+            return false;
+        }
+        else if ($('#banco').val() == "") {
+            sweetAlert("Oops...", "Informe o nome do banco !!", "error")
+            return false;
+        }
+        return true;
+    }
+    
+        $("#btnSalvar").click(function () {
+            if (ValidarSalvar()) {
+                var cliente = {
+                    CPF: $("#CPF").val(),
+                    Nome: $("#Nome").val(),
+                    DataNascimento: $("#DataNascimento").val(),
+                    RG: $("#RG").val(),
+                    Sexo: $("#Sexo").val(),
+                    DataExpedicao: $("#DataExpedicao").val(),
+                    OrgaoExpedicao: $("#OrgaoExpedicao").val(),
+                    UF_Expedicao: $("#UF_Expedicao").val(),
+                    EstadoCivil: $("#EstadoCivil").val(),
+                    CEP: $("#CEP").val(),
+                    Logradouro: $("#Logradouro").val(),
+                    Numero: $("#Numero").val(),
+                    Complemento: $("#Complemento").val(),
+                    Bairro: $("#Bairro").val(),
+                    Cidade: $("#Cidade").val(),
+                    UF: $("#UF").val()
+                };
+                $.ajax({
+                    url: '/CCliente/Criar',
+                    type: 'POST',
+                    data: JSON.stringify(cliente),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (resposta) {
+                        alert(resposta.mensagem);
+                        window.location.href = '/CCliente/Index';
+
+                    },
+                    error: function (xhr) {
+                        alert("Erro ao salvar: " + xhr.responseText);
+                    }
+                });
+            }
+
+        });
+
+    $("#btnEditar").click(function () {
+        if (ValidarSalvar()) {
+            var cliente = {
+                CPF: $("#CPF").val(),
+                Nome: $("#Nome").val(),
+                DataNascimento: $("#DataNascimento").val(),
+                RG: $("#RG").val(),
+                Sexo: $("#Sexo").val(),
+                DataExpedicao: $("#DataExpedicao").val(),
+                OrgaoExpedicao: $("#OrgaoExpedicao").val(),
+                UF_Expedicao: $("#UF_Expedicao").val(),
+                EstadoCivil: $("#EstadoCivil").val(),
+                CEP: $("#CEP").val(),
+                Logradouro: $("#Logradouro").val(),
+                Numero: $("#Numero").val(),
+                Complemento: $("#Complemento").val(),
+                Bairro: $("#Bairro").val(),
+                Cidade: $("#Cidade").val(),
+                UF: $("#UF").val()
+            };
+            $.ajax({
+                url: '/CCliente/Editar',
+                type: 'POST',
+                data: JSON.stringify(cliente),
+                contentType: 'application/json; charset=utf-8',
+                success: function (resposta) {
+                    alert(resposta.mensagem);
+                    window.location.href = '/CCliente/Index';
+
+                },
+                error: function (xhr) {
+                    alert("Erro ao salvar: " + xhr.responseText);
+                }
+            });
+        }
+
+    });
+
+    function Editar(CPF) {
+        $.ajax({
+            url: "/CCliente/BuscarPorCPF",
+            type: "GET",
+            data: { cpf: CPF },
+            dataType: "json", // corrigido
+            success: function (dados) {
+                $('#CPF').val(dados.CPF);
+                $('#Nome').val(dados.Nome);
+
+
+                var dataN = new Date(dados.DataNascimento);
+                $('#DataNascimento').val(dataN.toLocaleDateString('pt-BR'));
+
+                $('#RG').val(dados.RG);
+                $('#Sexo').val(dados.Sexo);
+                var data = new Date(dados.DataExpedicao);
+                $('#DataExpedicao').val(data.toLocaleDateString('pt-BR'));
+                $('#OrgaoExpedicao').val(dados.OrgaoExpedicao);
+                $('#UF_Expedicao').val(dados.UF_Expedicao);
+                $('#EstadoCivil').val(dados.EstadoCivil);
+
+
+                $('#CEP').val(dados.CEP);
+                $('#Logradouro').val(dados.Logradouro);
+                $('#Numero').val(dados.Numero);
+                $('#Complemento').val(dados.Complemento);
+                $('#Bairro').val(dados.Bairro);
+                $('#Cidade').val(dados.Cidade);
+                $('#UF').val(dados.UF);                
+                $('#btnSalvar').prop('disabled', true);
+                $('#btnEditar').prop('disabled', false);
+
+            },
+            error: function (error) {
+                alert("Erro ao buscar cliente: " + JSON.stringify(error));
+            },
+            cache: true // se realmente precisar
+        });
+    }
+
+    function Excluir(CPF) {
+        $.ajax({
+            url: "/CCliente/Excluir",
+            type: "POST",
+            data: { cpf: CPF },
+            dataType: "json", // corrigido
+            success: function (dados) {
+                LoadGridCliente();
+                alert(dados.mensagem);
+
+            },
+            error: function (error) {
+                alert("Erro ao buscar cliente: " + JSON.stringify(error));
+            },
+            cache: true // se realmente precisar
+        });
+    }
+
+
+
+    function Visualizar(Cod) {
+        $.ajax({
+            url: "/CCliente/Visualizar",
+            type: "POST",
+            data: { id_banco: Cod },
+            datatype: "json",
+            success: function (dados) {
+                $(dados).each(function (i) {
+                    $('#CPF').val(dados[i].CPF);
+                    $('#Nome').val(dados[i].Nome);
+                    $('#Cidade').val(dados[i].Cidade);
+                    document.getElementById("btnSalvar").style.display = "none";
+                    document.getElementById("btnCancelar").style.display = "block";
+                });
+            },
+            error: function (error) {
+                alert(JSON.stringify(error))
+                cache: true;
+            }
+        });
+    }
+    function Cancelar() {
+        document.getElementById("btnSalvar").style.display = "block";
+        document.getElementById("btnCancelar").style.display = "none";
+        $('#CPF').val("");
+        $('#Nome').val("");
+        $('#Cidade').val("");
+    }
+</script>
